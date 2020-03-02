@@ -1,0 +1,21 @@
+---
+- name: "installlig lamp in cnetos"
+  yum: 
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - mysql-server
+    - httpd
+    - php
+    - php-mysql
+   
+ 
+- name: "making service up and running"
+  service: 
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - httpd
+    - mysqld
+   
+ 

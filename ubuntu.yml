@@ -1,0 +1,25 @@
+---
+ - name: "installlig lamp in Ubuntu"
+   become: yes
+   apt: 
+    name: 
+     - apache2
+     - mysql-server
+     - php
+    state: present
+    update_cache: true
+ 
+ - name: " making service up and running"
+   become: yes
+   service: 
+    name: "{{ item }}"
+    state: started
+   with_items:
+    - apache2
+    - mysql
+   
+ - name : "Copying files to remote s/m"
+   become: yes
+   copy: 
+    content: "<?php phpinfo(); ?>"
+    dest: /var/www/html/myinfo.php
